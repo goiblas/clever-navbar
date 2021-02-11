@@ -30,44 +30,44 @@
     align-items: center;
   
     &--campaign-creator {
-      --feature-color: var(--c-feature-campaign-creator-main);
-      --feature-bg: var(--c-feature-campaign-creator-lighter);
+      --feature-color: var(--c-product-campaign-creator-main);
+      --feature-bg: var(--c-product-campaign-creator-lighter);
     }
     &--audit {
-      --feature-color: var(--c-feature-audit-main);
-      --feature-bg: var(--c-feature-audit-lighter);
+      --feature-color: var(--c-product-audit-main);
+      --feature-bg: var(--c-product-audit-lighter);
     }
     &--banner-creator {
-      --feature-color: var(--c-feature-banner-creator-main);
-      --feature-bg: var(--c-feature-banner-creator-lighter);
+      --feature-color: var(--c-product-banner-creator-main);
+      --feature-bg: var(--c-product-banner-creator-lighter);
     }
     &--kwp {
-      --feature-color: var(--c-feature-kwp-main);
-      --feature-bg: var(--c-feature-kwp-lighter);
+      --feature-color: var(--c-product-kwp-main);
+      --feature-bg: var(--c-product-kwp-lighter);
     }
     &--slack {
-      --feature-color: var(--c-feature-slack-main);
-      --feature-bg: var(--c-feature-slack-lighter);
+      --feature-color: var(--c-product-slack-main);
+      --feature-bg: var(--c-product-slack-lighter);
     }
     &--translator {
-      --feature-color: var(--c-feature-translator-main);
-      --feature-bg: var(--c-feature-translator-lighter);
+      --feature-color: var(--c-product-translator-main);
+      --feature-bg: var(--c-product-translator-lighter);
     }
     &--promo-code {
-      --feature-color: var(--c-feature-promo-code-main);
-      --feature-bg: var(--c-feature-promo-code-lighter);
+      --feature-color: var(--c-product-promo-code-main);
+      --feature-bg: var(--c-product-promo-code-lighter);
     }
     &--mobile-app {
-      --feature-color: var(--c-feature-mobile-app-main);
-      --feature-bg: var(--c-feature-mobile-app-lighter);
+      --feature-color: var(--c-product-mobile-app-main);
+      --feature-bg: var(--c-product-mobile-app-lighter);
     }
     &--teams {
-      --feature-color: var(--c-feature-teams-main);
-      --feature-bg: var(--c-feature-teams-lighter);
+      --feature-color: var(--c-product-teams-main);
+      --feature-bg: var(--c-product-teams-lighter);
     }
     &--digital-pack {
-      --feature-color: var(--c-feature-digital-pack-main);
-      --feature-bg: var(--c-feature-digital-pack-lighter);
+      --feature-color: var(--c-product-digital-pack-main);
+      --feature-bg: var(--c-product-digital-pack-lighter);
     }
   }
   
