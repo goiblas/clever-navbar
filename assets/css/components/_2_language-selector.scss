@@ -1,0 +1,15 @@
+.language-selector {
+    &__header{
+        padding: .5rem 1rem 1rem;
+        border-bottom: 1px solid var(--c-gray-lighter);
+        margin-bottom: 1rem;        
+    }
+    &__input {
+        padding-left: 1rem;
+        font-size: var(--text-small);
+    }
+    &__list {
+        max-height: 40vh;
+        overflow: auto;
+    }
+}

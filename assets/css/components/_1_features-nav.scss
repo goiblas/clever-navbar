@@ -1,0 +1,104 @@
+
+:root {
+    --main-header-feature-icon-size: 1.25rem;
+    --main-header-feature-circle-size: 2rem;
+    --main-header-push-dropdown: 20%;
+    
+    --main-header-height: 56px;
+    --main-header-logo-width: 198px;
+    --main-header-bg: rgba(255, 255, 255, .9);
+    
+    @include in-desktop {
+        --main-header-height: 90px;
+        --main-header-feature-icon-size: 1.6rem;
+        --main-header-feature-circle-size: 3rem;
+    }
+}
+
+.features-nav {
+    font-family: var(--f-family-alternative);
+  }
+  
+  .features-nav__grid {
+    display: grid;
+    row-gap: 1rem;
+  }
+  .features-nav__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  
+    &--campaign-creator {
+      --feature-color: var(--c-feature-campaign-creator-main);
+      --feature-bg: var(--c-feature-campaign-creator-lighter);
+    }
+    &--audit {
+      --feature-color: var(--c-feature-audit-main);
+      --feature-bg: var(--c-feature-audit-lighter);
+    }
+    &--banner-creator {
+      --feature-color: var(--c-feature-banner-creator-main);
+      --feature-bg: var(--c-feature-banner-creator-lighter);
+    }
+    &--kwp {
+      --feature-color: var(--c-feature-kwp-main);
+      --feature-bg: var(--c-feature-kwp-lighter);
+    }
+    &--slack {
+      --feature-color: var(--c-feature-slack-main);
+      --feature-bg: var(--c-feature-slack-lighter);
+    }
+    &--translator {
+      --feature-color: var(--c-feature-translator-main);
+      --feature-bg: var(--c-feature-translator-lighter);
+    }
+    &--promo-code {
+      --feature-color: var(--c-feature-promo-code-main);
+      --feature-bg: var(--c-feature-promo-code-lighter);
+    }
+    &--mobile-app {
+      --feature-color: var(--c-feature-mobile-app-main);
+      --feature-bg: var(--c-feature-mobile-app-lighter);
+    }
+    &--teams {
+      --feature-color: var(--c-feature-teams-main);
+      --feature-bg: var(--c-feature-teams-lighter);
+    }
+    &--digital-pack {
+      --feature-color: var(--c-feature-digital-pack-main);
+      --feature-bg: var(--c-feature-digital-pack-lighter);
+    }
+  }
+  
+  .features-nav__title {
+    font-size: var(--text-large);
+    color: var(--c-gray-darker);
+    font-weight: 500;
+    padding-bottom: 2rem;
+  }
+  
+  .features-nav__item-title {
+    color: var(--feature-color, var(--c-primary-main));
+    font-weight: 500;
+    margin-bottom: .25rem;
+  }
+  .features-nav__item-details {
+    display: none;
+  }
+  
+  .features-nav__item-icon {
+    border-radius: 50%;
+    color:var(--feature-color, var(--c-primary-main));  
+    background-color: var(--feature-bg,  var(--c-primary-lighter));
+    display: flex;
+    height: var(--main-header-feature-circle-size);
+    width: var(--main-header-feature-circle-size);
+  
+    svg, img {
+      width: var(--main-header-feature-icon-size);
+      height: var(--main-header-feature-icon-size); 
+      object-fit: contain;
+      margin: auto;
+    }
+  }
