@@ -110,12 +110,7 @@
   }
 }
 
-.main-header__nav-control { // menu button
-  --anim-menu-btn-size: 44px;
-  // 🍔 icon
-  --anim-menu-btn-icon-size: 28px;
-  --anim-menu-btn-icon-stroke: 2px;
-
+.main-header__nav-control {
   background-color: var(--main-header-bg);
   border-radius: var(--radius-full);
   position: fixed;
