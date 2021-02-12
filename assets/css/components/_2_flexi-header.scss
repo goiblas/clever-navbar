@@ -2,7 +2,9 @@
 
 :root {
   --main-header-push-dropdown: 20%;
-  
+  --main-header-items-gap: .15rem;
+  --main-header-dropdown-arrow-offset: .46rem;
+
   --main-header-link-padding: .75rem 1.25rem;
   --main-header-height: 56px;
   --main-header-logo-width: 198px;
@@ -11,8 +13,14 @@
   @include in-desktop {
     --main-header-height: 90px;
   }
+
+  @include in-small-desktop {
+      --main-header-dropdown-arrow-offset: 1rem;
+  }
+
   @include in-large-desktop {
     --main-header-link-padding: .75rem 1.75rem;
+    --main-header-items-gap: .5rem;
   }
 }
 
@@ -116,6 +124,7 @@
   position: fixed;
   top: 1.25rem;
   right: 2rem;
+  box-shadow: var(--shadow-lg);
 }
 
 .main-header__nav {
@@ -277,7 +286,7 @@
   }
 
   .main-header__list > :not(:last-child) {
-    margin-right: .5rem;
+    margin-right: var(--main-header-items-gap);
   }
   
   .main-header__dropdown-icon {
@@ -318,7 +327,7 @@
       border-color: transparent transparent #ffffff transparent;
       position: absolute;
       top: 0;
-      right: calc(var(--main-header-push-dropdown) - .46rem);
+      right: calc(var(--main-header-push-dropdown) - var(--main-header-dropdown-arrow-offset));
       transform: translateX(-50%);
     }
 
@@ -356,6 +365,7 @@
     display: flex;
     align-items: center;
     padding-left: 1rem; 
+
     > *:not(:last-child) {
       margin-right: 1rem;
     }
@@ -403,6 +413,7 @@
         bottom: -1.25rem;
         right: -.65rem;
         background-color: rgba(0,0,0,.03);
+        border-radius: var(--radius-md);
       }
     }
     .features-nav__item-details {

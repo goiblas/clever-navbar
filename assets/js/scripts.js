@@ -247,6 +247,10 @@ function resetFocusTabsStyle() {
 })();
 
 (function () {
+  var mobileList = document.querySelector(".js-language-list-mobile"),
+    desktopList = document.querySelector(".js-language-list-desktop"),
+    inputFilter = document.querySelector(".js-language-filter");
+
   function getLocales() {
     return {
       "": "English",
@@ -370,12 +374,62 @@ function resetFocusTabsStyle() {
     document.cookie = name + "=" + value;
   }
 
-  function goToLocale() {
-    //const locale = $(this).attr("data-locale");
-    setCookie("locale", locale);
-
-    window.location.href = "/";
+  function normalize(term) {
+    return term.trim().toLowerCase();
   }
 
-  console.log(getLocales());
+  function printDesktopLanguages() {
+    const filter = normalize(inputFilter.value);
+
+    var locales = getLocales();
+    var localesHtml = "";
+
+    for (const localeKey in locales) {
+      const locale = locales[localeKey];
+      if (localeKey && normalize(locale).includes(filter)) {
+        localesHtml +=
+          '<li><a href="#" data onclick="goToLocale(event)" class="main-header__dropdown-link">' +
+          locales[localeKey] +
+          "</a></li>";
+      }
+    }
+    desktopList.innerHTML = localesHtml;
+  }
+
+  function printMobileLanguages() {
+    var locales = getLocales();
+    var localesHtml = "";
+
+    for (const localeKey in locales) {
+      const locale = locales[localeKey];
+      if (localeKey) {
+        localesHtml +=
+          '<option value="' +
+          localeKey +
+          '">' +
+          locales[localeKey] +
+          "</option>";
+      }
+    }
+    mobileList.innerHTML = localesHtml;
+  }
+
+  printDesktopLanguages();
+  printMobileLanguages();
+
+  inputFilter.addEventListener("keyup", printDesktopLanguages);
+  mobileList.addEventListener("change", (ev) => {
+    console.log("hola munto!");
+    console.log(ev.target.value);
+  });
 })();
+
+function goToLocale(ev) {
+  var label = document.querySelector(".js-language-label");
+  label.textContent = ev.target.textContent;
+
+  //const locale = $(this).attr("data-locale");
+  console.log(ev.target.href);
+  ev.preventDefault();
+  // setCookie("locale", locale);
+}
