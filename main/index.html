@@ -209,14 +209,14 @@
           <li class="main-header__item"><a href="#" class="main-header__link">Blog</a></li>
           <li class="main-header__item"><a href="#" class="main-header__link">FAQs</a></li>
           <li class="main-header__item show-in-mobile is-last-item">
-            <select name="select" class="form-control">
+            <select name="select" class="form-control js-language-list-mobile">
               <option value="en" selected>English</option>
               <option value="es">Español</option>
               <option value="ca">català, valencià</option>
             </select>
         </li>
           <li class="main-header__item hide-in-mobile"><a href="#" class="main-header__link">
-            <span>English</span>
+            <span class="js-language-label">English</span>
             <svg class="main-header__dropdown-icon" aria-hidden="true" width="11" height="7" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.746.29a1 1 0 00-1.41 0l-3.59 3.54L2.206.29a1 1 0 10-1.41 1.42l4.24 4.24a1 1 0 001.42 0l4.29-4.24a1 1 0 000-1.42z" fill="currentColor" fill-rule="nonzero"/>
             </svg>
@@ -225,9 +225,9 @@
             <div class="main-header__dropdown-content">
               <div class="language-selector">
                 <div class="language-selector__header">
-                  <input type="text" id="localeSearch" class="form-control language-selector__input" placeholder="Search">
+                  <input type="text" id="localeSearch" class="form-control language-selector__input js-language-filter" autocomplete="off" placeholder="Search">
                 </div>
-                <ul class="language-selector__list">
+                <ul class="language-selector__list js-language-list-desktop">
                   <li><a href="#" class="main-header__dropdown-link">Español</a></li>
                   <li><a href="#" class="main-header__dropdown-link">Afrikaans</a></li>
                   <li><a href="#" class="main-header__dropdown-link">العربية</a></li>
