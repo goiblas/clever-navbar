@@ -354,7 +354,8 @@
   .main-header__dropdown-link {
     padding: .5rem 1rem;
     
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: var(--c-primary-lighter);
     }
   }
@@ -429,4 +430,3 @@
     --main-header-push-dropdown: 80%;
   }
 }
-
