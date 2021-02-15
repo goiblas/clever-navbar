@@ -1,3 +1,4 @@
+// Animation menu button
 (function () {
   var menuBtns = document.getElementsByClassName("js-anim-menu-btn");
   if (menuBtns.length > 0) {

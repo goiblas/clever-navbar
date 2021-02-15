@@ -79,6 +79,7 @@ function resetFocusTabsStyle() {
   window.dispatchEvent(new CustomEvent("initFocusTabs"));
 }
 
+// Animation menu button
 (function () {
   var menuBtns = document.getElementsByClassName("js-anim-menu-btn");
   if (menuBtns.length > 0) {
@@ -103,6 +104,7 @@ function resetFocusTabsStyle() {
   }
 })();
 
+// Main header
 (function () {
   var mainHeader = document.getElementsByClassName("js-main-header");
   if (mainHeader.length > 0) {
@@ -212,6 +214,7 @@ function resetFocusTabsStyle() {
   }
 })();
 
+// Mobile float sign in
 (function () {
   var floatSignIn = document.getElementsByClassName("js-float-sign-in")[0];
 
@@ -246,6 +249,7 @@ function resetFocusTabsStyle() {
   }
 })();
 
+// language selector
 (function () {
   var mobileList = document.querySelector(".js-language-list-mobile"),
     desktopList = document.querySelector(".js-language-list-desktop"),
@@ -374,6 +378,7 @@ function resetFocusTabsStyle() {
     return term.trim().toLowerCase();
   }
 
+  // Desktop
   function printListLocalesDesktop() {
     var filter = normalize(inputFilter.value);
 
@@ -413,6 +418,7 @@ function resetFocusTabsStyle() {
     }
   }
 
+  // Mobile
   function printListLocalesMobile() {
     var locales = getLocales();
     var fragment = document.createDocumentFragment();
@@ -436,6 +442,7 @@ function resetFocusTabsStyle() {
     goToLocale(key);
   }
 
+  // Shared
   function printLocaleSelected(localeKey) {
     var locales = getLocales();
 
@@ -443,6 +450,36 @@ function resetFocusTabsStyle() {
     mobileList.value = localeKey;
   }
 
+  function goToLocale(locale) {
+    const path = getPath();
+    setCookie("locale", locale);
+
+    window.location.href = locale + path;
+
+    function setCookie(name, value) {
+      document.cookie = name + "=" + value;
+    }
+  }
+
+  function getPath() {
+    var t = getLocalePath();
+    return t
+      ? window.location.pathname.replace(`/${t}/`, "/")
+      : window.location.pathname;
+  }
+
+  function getLocalePath() {
+    var localeKeys = Object.keys(getLocales()).filter(Boolean);
+    var candidateLocale = window.location.pathname.split("/")[1];
+
+    if (localeKeys.indexOf(candidateLocale) >= 0) {
+      return candidateLocale;
+    }
+
+    return false;
+  }
+
+  // Init
   function init() {
     // Print list
     printListLocalesDesktop();
@@ -459,30 +496,4 @@ function resetFocusTabsStyle() {
 
   // init
   document.addEventListener("DOMContentLoaded", init);
-
-  // global function
-  window.goToLocale = function (locale) {
-    const path = getPath();
-    setCookie("locale", locale);
-
-    window.location.href = locale + path;
-
-    function setCookie(name, value) {
-      document.cookie = name + "=" + value;
-    }
-  };
-
-  ////////////////
-  // temporal estas funciones ya las integran el script de clever ads
-  function getPath() {
-    var t = getLocale();
-    return t
-      ? window.location.pathname.replace(`/${t}/`, "/")
-      : window.location.pathname;
-  }
-  function getLocale() {
-    var t = ["en", "es", "af", "sq", "am"],
-      e = window.location.pathname.split("/")[1];
-    return t.indexOf(e.trim()) >= 0 && e;
-  }
 })();

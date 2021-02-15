@@ -1,3 +1,4 @@
+// Main header
 (function () {
   var mainHeader = document.getElementsByClassName("js-main-header");
   if (mainHeader.length > 0) {
