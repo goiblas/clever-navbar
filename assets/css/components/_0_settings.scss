@@ -62,7 +62,8 @@
     --text-small: 0.875rem;
     
     --lh-narrow: 1.3;
-    @media(min-width: 62em) {
+    
+    @include in-desktop {
         --text-large: 1.225rem; 
         --text-main: 1.125rem; // 18
     }

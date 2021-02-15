@@ -249,7 +249,8 @@ function resetFocusTabsStyle() {
 (function () {
   var mobileList = document.querySelector(".js-language-list-mobile"),
     desktopList = document.querySelector(".js-language-list-desktop"),
-    inputFilter = document.querySelector(".js-language-filter");
+    inputFilter = document.querySelector(".js-language-filter"),
+    desktopLabel = document.querySelector(".js-language-label");
 
   function getLocales() {
     return {
@@ -355,9 +356,9 @@ function resetFocusTabsStyle() {
   }
 
   function getLocaleCookie() {
-    const name = "locale";
+    var name = "locale";
 
-    let response = document.cookie
+    var response = document.cookie
       .split(";")
       .map((c) => c.trim())
       .find((c) => c.substring(0, name.length + 1) === name + "=");
@@ -366,70 +367,122 @@ function resetFocusTabsStyle() {
       if (response.length > 1) response = response[1];
       else response = undefined;
     }
-    console.log(document.cookie);
     return response;
-  }
-
-  function setCookie(name, value) {
-    document.cookie = name + "=" + value;
   }
 
   function normalize(term) {
     return term.trim().toLowerCase();
   }
 
-  function printDesktopLanguages() {
-    const filter = normalize(inputFilter.value);
+  function printListLocalesDesktop() {
+    var filter = normalize(inputFilter.value);
 
     var locales = getLocales();
-    var localesHtml = "";
+    var fragment = document.createDocumentFragment();
 
-    for (const localeKey in locales) {
-      const locale = locales[localeKey];
+    for (var localeKey in locales) {
+      var locale = locales[localeKey];
+
       if (localeKey && normalize(locale).includes(filter)) {
-        localesHtml +=
-          '<li><a href="#" data onclick="goToLocale(event)" class="main-header__dropdown-link">' +
-          locales[localeKey] +
-          "</a></li>";
+        var li = document.createElement("li");
+        var link = createLink(localeKey, locale);
+
+        li.appendChild(link);
+        fragment.appendChild(li);
       }
     }
-    desktopList.innerHTML = localesHtml;
+
+    desktopList.innerHTML = ""; // clear
+    desktopList.appendChild(fragment);
+
+    function createLink(key, locale) {
+      var link = document.createElement("a");
+
+      link.setAttribute("href", "#");
+      link.classList.add("main-header__dropdown-link");
+
+      var text = document.createTextNode(locale);
+      link.appendChild(text);
+
+      link.onclick = function (ev) {
+        ev.preventDefault();
+        goToLocale(key);
+      };
+
+      return link;
+    }
   }
 
-  function printMobileLanguages() {
+  function printListLocalesMobile() {
     var locales = getLocales();
-    var localesHtml = "";
+    var fragment = document.createDocumentFragment();
 
-    for (const localeKey in locales) {
-      const locale = locales[localeKey];
+    for (var localeKey in locales) {
       if (localeKey) {
-        localesHtml +=
-          '<option value="' +
-          localeKey +
-          '">' +
-          locales[localeKey] +
-          "</option>";
+        var option = document.createElement("option");
+        option.value = localeKey;
+        option.textContent = locales[localeKey];
+
+        fragment.appendChild(option);
       }
     }
-    mobileList.innerHTML = localesHtml;
+
+    mobileList.innerHTML = ""; // clear
+    mobileList.appendChild(fragment);
   }
 
-  printDesktopLanguages();
-  printMobileLanguages();
+  function handleMobileSelector(ev) {
+    const key = ev.target.value;
+    goToLocale(key);
+  }
 
-  inputFilter.addEventListener("keyup", printDesktopLanguages);
-  mobileList.addEventListener("change", (ev) => {
-    console.log("hola munto!");
-    console.log(ev.target.value);
-  });
+  function printLocaleSelected(localeKey) {
+    var locales = getLocales();
+
+    desktopLabel.textContent = locales[localeKey];
+    mobileList.value = localeKey;
+  }
+
+  function init() {
+    // Print list
+    printListLocalesDesktop();
+    printListLocalesMobile();
+
+    // Print locale selected
+    var localeKeySelected = getLocaleCookie() || "en";
+    printLocaleSelected(localeKeySelected);
+
+    // Listeners
+    inputFilter.addEventListener("keyup", printListLocalesDesktop);
+    mobileList.addEventListener("change", handleMobileSelector);
+  }
+
+  // init
+  document.addEventListener("DOMContentLoaded", init);
+
+  // global function
+  window.goToLocale = function (locale) {
+    const path = getPath();
+    setCookie("locale", locale);
+
+    window.location.href = locale + path;
+
+    function setCookie(name, value) {
+      document.cookie = name + "=" + value;
+    }
+  };
+
+  ////////////////
+  // temporal estas funciones ya las integran el script de clever ads
+  function getPath() {
+    var t = getLocale();
+    return t
+      ? window.location.pathname.replace(`/${t}/`, "/")
+      : window.location.pathname;
+  }
+  function getLocale() {
+    var t = ["en", "es", "af", "sq", "am"],
+      e = window.location.pathname.split("/")[1];
+    return t.indexOf(e.trim()) >= 0 && e;
+  }
 })();
-
-function goToLocale(ev) {
-  var label = document.querySelector(".js-language-label");
-  label.textContent = ev.target.textContent;
-
-  //const locale = $(this).attr("data-locale");
-  console.log(ev.target.href);
-  ev.preventDefault();
-  // setCookie("locale", locale);
-}

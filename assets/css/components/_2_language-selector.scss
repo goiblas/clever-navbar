@@ -9,7 +9,34 @@
         font-size: var(--text-small);
     }
     &__list {
-        max-height: 40vh;
+        max-height: calc(90vh - 200px); // fallback
+        max-height: #{'min(calc(90vh - 200px), 400px)'};
         overflow: auto;
+    }
+}
+
+.language-truncate {
+    max-width: 9ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.custom-scrollbar {
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+  
+    &::-webkit-scrollbar-track { // progress bar
+      background-color: var(--c-gray-lighter);
+    }
+    
+    &::-webkit-scrollbar-thumb { // handle
+      background-color: var(--c-gray-main);
+      border-radius: 8px;
+    }
+  
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--c-gray-dark);
     }
 }
