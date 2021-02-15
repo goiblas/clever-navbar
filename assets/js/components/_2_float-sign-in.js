@@ -1,3 +1,4 @@
+// Mobile float sign in
 (function () {
   var floatSignIn = document.getElementsByClassName("js-float-sign-in")[0];
 

@@ -1,3 +1,4 @@
+// language selector
 (function () {
   var mobileList = document.querySelector(".js-language-list-mobile"),
     desktopList = document.querySelector(".js-language-list-desktop"),
@@ -126,6 +127,7 @@
     return term.trim().toLowerCase();
   }
 
+  // Desktop
   function printListLocalesDesktop() {
     var filter = normalize(inputFilter.value);
 
@@ -165,6 +167,7 @@
     }
   }
 
+  // Mobile
   function printListLocalesMobile() {
     var locales = getLocales();
     var fragment = document.createDocumentFragment();
@@ -188,6 +191,7 @@
     goToLocale(key);
   }
 
+  // Shared
   function printLocaleSelected(localeKey) {
     var locales = getLocales();
 
@@ -195,6 +199,36 @@
     mobileList.value = localeKey;
   }
 
+  function goToLocale(locale) {
+    const path = getPath();
+    setCookie("locale", locale);
+
+    window.location.href = locale + path;
+
+    function setCookie(name, value) {
+      document.cookie = name + "=" + value;
+    }
+  }
+
+  function getPath() {
+    var t = getLocalePath();
+    return t
+      ? window.location.pathname.replace(`/${t}/`, "/")
+      : window.location.pathname;
+  }
+
+  function getLocalePath() {
+    var localeKeys = Object.keys(getLocales()).filter(Boolean);
+    var candidateLocale = window.location.pathname.split("/")[1];
+
+    if (localeKeys.indexOf(candidateLocale) >= 0) {
+      return candidateLocale;
+    }
+
+    return false;
+  }
+
+  // Init
   function init() {
     // Print list
     printListLocalesDesktop();
@@ -211,30 +245,4 @@
 
   // init
   document.addEventListener("DOMContentLoaded", init);
-
-  // global function
-  window.goToLocale = function (locale) {
-    const path = getPath();
-    setCookie("locale", locale);
-
-    window.location.href = locale + path;
-
-    function setCookie(name, value) {
-      document.cookie = name + "=" + value;
-    }
-  };
-
-  ////////////////
-  // temporal estas funciones ya las integran el script de clever ads
-  function getPath() {
-    var t = getLocale();
-    return t
-      ? window.location.pathname.replace(`/${t}/`, "/")
-      : window.location.pathname;
-  }
-  function getLocale() {
-    var t = ["en", "es", "af", "sq", "am"],
-      e = window.location.pathname.split("/")[1];
-    return t.indexOf(e.trim()) >= 0 && e;
-  }
 })();
